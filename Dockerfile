@@ -1,4 +1,4 @@
-FROM node:14.15-buster-slim
+FROM node:17-buster-slim
 
 ADD . /home/workdir
 
