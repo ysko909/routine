@@ -14,7 +14,7 @@ Reactプロジェクト用のDocker環境のサンプル。
 5. `cd app_name`を実行してフォルダを移動する。
 6. `yarn start`を実行して、ブラウザで「`localhost:3000`」にアクセスする。Reactの画面が表示されれば成功。
 
-## 備考
+## 注意点
 
 当リポジトリを作成した元の環境がWindowsだったせいか、ファイル`devcontainer.json`で以下のような記述がある。
 
