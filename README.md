@@ -50,7 +50,7 @@ mkdir dist
 "outDir": "./dist",    /* Redirect output structure to the directory. */
 ```
 
-出力先フォルダを先ほど作成した`dist`に設定し、JSファイルと共存させるため`allowJs`も追記しておく。
+正確には上記の項目がそれぞれもともとコメントアウトされていると思うので、コメントを外して必要な追記を行う感じ。出力先フォルダを先ほど作成した`dist`に設定し、JSファイルと共存させるため`allowJs`を有効にする。
 
 ```console
 /**
