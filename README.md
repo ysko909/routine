@@ -45,3 +45,12 @@ export default defineConfig({
 ```
 
 「1つ上のフォルダにある`docker-compose.yml`」を指している部分について、本来**スラッシュ1つ**`/`だった部分を**バックスラッシュ2つ**`\\`に変更してエスケープしている。macOSなど他のプラットフォームだと問題ないのだが、Windowsに関してのみこの部分がスラッシュ1つだとうまく解釈できずエラーになった。今はどうかわからないが・・・。
+
+## 参考
+
+1. [digitsensitive/phaser3-typescript](https://github.com/digitsensitive/phaser3-typescript)
+2. [DockerでTypeScript×Node.js×Expressの環境構築](https://qiita.com/tanakaPH/items/84aedaad8c0f5958a5f0)
+3. [How to deploy Phaser 3 — Node.js — Express — Webpack Game to Heroku](https://medium.com/@diegoreyes1212/how-to-deploy-phaser-3-node-js-express-webpack-game-to-heroku-tutorial-8a813f31502c)
+4. [Vite Server is running but not working on localhost](https://stackoverflow.com/questions/70694187/vite-server-is-running-but-not-working-on-localhost)
+
+
