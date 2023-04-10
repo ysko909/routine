@@ -3,6 +3,8 @@ import replace from '@rollup/plugin-replace';
 
 export default defineConfig({
   build: {
+    // Viteは4k以下の小さな画像をbase64でインライン化しリンク切れを起こすので以下で対処
+    assetsInlineLimit: 0,
     rollupOptions: {
       plugins: [
         //  Toggle the booleans here to enable / disable Phaser 3 features:
