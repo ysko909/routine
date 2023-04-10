@@ -33,6 +33,21 @@ export default defineConfig({
 
 `port`で指定しないとデフォルトとして3000ポートを使うのだが、たまたま別のコンテナで使ってたりするとポートが利用できない。わりと3000はよく使うので、最初から別のポートを使うよう`vite.config.ts`に追記している。
 
+### Viteのインライン化阻止
+
+デフォルト設定だと、Viteは4k以下の小さな画像を**勝手に**base64でインライン化してしまう。すると、Phaser.jsから参照できなくなりリンク切れを起こしてしまう。これを阻止するため、`vite.config.ts`を編集する。
+
+```typescript
+export default defineConfig({
+  build: {
+    assetsInlineLimit: 0,  // これ
+    //  中略
+});
+
+```
+
+この問題の厄介なところは、開発時は見えていた画像が`build`すると見えなくなる点。それまでは順調に開発できていても、`build`する際にインライン化するので、そこで初めてリンク切れを起こして問題が表面化する。
+
 ### `devcontainer.json`の書き換え
 
 当リポジトリをWindowsで利用しようとしたとき、ファイル`devcontainer.json`におけるフォルダ指定を書き換える必要があった。
@@ -56,4 +71,5 @@ export default defineConfig({
 4. [Vite Server is running but not working on localhost](https://stackoverflow.com/questions/70694187/vite-server-is-running-but-not-working-on-localhost)
 1. [Phaser + TypeScript + Viteの環境構築](https://qiita.com/Button501/items/0a2290d297f9876dc271)
 1. [Phaser.js + TypeScript + Viteでゲーム開発](https://dev.classmethod.jp/articles/phaser-js-typescript-vite/)
+2. [【TypeScript/Phaser.js】記号だけで戦うタイピングゲーム作った](https://qiita.com/umaxyon/items/0826ab5eb5b369e1f5e3)
 
