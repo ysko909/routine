@@ -48,9 +48,12 @@ export default defineConfig({
 
 ## 参考
 
+1. [geocine/phaser3-rollup-typescript](https://github.com/geocine/phaser3-rollup-typescript)
 1. [digitsensitive/phaser3-typescript](https://github.com/digitsensitive/phaser3-typescript)
+1. [geckosio/phaser-on-nodejs](https://github.com/geckosio/phaser-on-nodejs)
 2. [DockerでTypeScript×Node.js×Expressの環境構築](https://qiita.com/tanakaPH/items/84aedaad8c0f5958a5f0)
 3. [How to deploy Phaser 3 — Node.js — Express — Webpack Game to Heroku](https://medium.com/@diegoreyes1212/how-to-deploy-phaser-3-node-js-express-webpack-game-to-heroku-tutorial-8a813f31502c)
 4. [Vite Server is running but not working on localhost](https://stackoverflow.com/questions/70694187/vite-server-is-running-but-not-working-on-localhost)
-
+1. [Phaser + TypeScript + Viteの環境構築](https://qiita.com/Button501/items/0a2290d297f9876dc271)
+1. [Phaser.js + TypeScript + Viteでゲーム開発](https://dev.classmethod.jp/articles/phaser-js-typescript-vite/)
 
