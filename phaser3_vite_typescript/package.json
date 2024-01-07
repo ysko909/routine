@@ -7,18 +7,19 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/geocine/phaser3-rollup-typescript.git"
+    "url": "git+https://github.com/ysko909/routine"
   },
   "author": "Aivan Monceller",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/geocine/phaser3-rollup-typescript/issues"
+    "url": "https://github.com/ysko909/routine/issues"
   },
-  "homepage": "https://github.com/geocine/phaser3-rollup-typescript#readme",
+  "homepage": "https://ysko909.github.io/routine",
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.9",
     "@rollup/plugin-commonjs": "^22.0.0",

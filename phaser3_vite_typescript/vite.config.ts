@@ -21,6 +21,6 @@ export default defineConfig({
   },
   server: {
     port: 8000
-  }, 
-  base: ''
+  },
+  base: "/routine/"
 });
