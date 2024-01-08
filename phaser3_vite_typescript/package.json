@@ -6,9 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d dist"
+    "serve": "vite preview"
   },
   "repository": {
     "type": "git",
