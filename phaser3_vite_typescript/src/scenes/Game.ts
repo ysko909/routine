@@ -10,6 +10,8 @@ class ProgressRect extends Phaser.GameObjects.Rectangle {
   private _isActive = true;
   public startPositionLine: Phaser.GameObjects.Line;
   public endPositionLine: Phaser.GameObjects.Line;
+  public startTimeText: Phaser.GameObjects.Text;
+  public endTimeText: Phaser.GameObjects.Text;
 
   constructor(scene: Phaser.Scene, startDate: dayjs.Dayjs, endDate: dayjs.Dayjs, x: number, y: number, width: number, height: number, fillColor: number, imageTexture: string, imageSetScale = 1) {
     // 親クラスのコンストラクタ呼び出し 
@@ -29,6 +31,9 @@ class ProgressRect extends Phaser.GameObjects.Rectangle {
 
     this.startPositionLine = scene.add.line(x, y - 15, 0, 0, 0, height + 30, fillColor).setOrigin(0, 0);
     this.endPositionLine = scene.add.line(x + width - 1, y - 15, 0, 0, 0, height + 30, fillColor).setOrigin(0, 0);
+
+    this.startTimeText = scene.add.text(x, y + (height / 4), this._startDate.format('HHじmmふん すたーと'));
+    this.endTimeText = scene.add.text(x + width - 150, y + (height / 2), this._endDate.format('HHじmmふん おわり'));
   }
 
   // 長方形のサイズ変更処理
@@ -127,7 +132,7 @@ export default class Demo extends Phaser.Scene {
 
     // 矩形オブジェクトを生成
     // 朝食
-    const eatBreakfastStart = this._date.set('hour', 6).set('minute', 40).set('second', 0);
+    const eatBreakfastStart = this._date.set('hour', 6).set('minute', 30).set('second', 0);
     const eatBreakfastEnd = eatBreakfastStart.add(40, 'minute');
     this.eatBreakfast = new ProgressRect(this,
       eatBreakfastStart,
@@ -183,7 +188,7 @@ export default class Demo extends Phaser.Scene {
       this.getDressed.updateSize(now);
       this.brushingTeeth.updateSize(now);
 
-      this.timeText.setText(now.format('YYYYねんMがつDにち HHじmふんsびょう'));
+      this.timeText.setText(now.format('YYYYねんMがつDにち Hじmふんsびょう'));
       this.counter = 0;
     }
 
