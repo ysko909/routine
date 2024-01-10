@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import dayjs from 'dayjs';
 
+// 時間経過とともに変化する長方形を表すクラス
 class ProgressRect extends Phaser.GameObjects.Rectangle {
   private _startDate: dayjs.Dayjs;
   private _endDate: dayjs.Dayjs;
@@ -11,8 +12,10 @@ class ProgressRect extends Phaser.GameObjects.Rectangle {
   public endPositionLine: Phaser.GameObjects.Line;
 
   constructor(scene: Phaser.Scene, startDate: dayjs.Dayjs, endDate: dayjs.Dayjs, x: number, y: number, width: number, height: number, fillColor: number, imageTexture: string, imageSetScale = 1) {
+    // 親クラスのコンストラクタ呼び出し 
     super(scene, x, y, width, height, fillColor);
 
+    // その他の初期化処理
     this._startDate = startDate;
     this._endDate = endDate;
 
@@ -28,14 +31,17 @@ class ProgressRect extends Phaser.GameObjects.Rectangle {
     this.endPositionLine = scene.add.line(x + width - 1, y - 15, 0, 0, 0, height + 30, fillColor).setOrigin(0, 0);
   }
 
+  // 長方形のサイズ変更処理
   updateSize(nowDate: dayjs.Dayjs) {
     if (nowDate <= this._endDate) {
-      this._isActive = true;
+      // this._isActive = true;
     } else {
+      // 規定の時間を経過した場合は無効化しグレーアウトさせる
       this._isActive = false;
       this.setFillStyle(0xdddddd);
     }
 
+    // アクティブな場合のみ矩形のサイズを変更する
     if (this._isActive) {
       if (nowDate < this._startDate) {
         this.setScale(0, 1);
@@ -73,6 +79,7 @@ export default class Demo extends Phaser.Scene {
   constructor() {
     super('GameScene');
 
+    // 画面更新のタイミング調整用プロパティ
     this._limit = 60;
     this.counter = 0;
 
@@ -84,6 +91,7 @@ export default class Demo extends Phaser.Scene {
   }
 
   preload() {
+    // アセットのロード
     this.load.image('logo', 'assets/phaser3-logo.png');
     this.load.image('baby', 'assets/baby.png');
     this.load.image('getDressed', 'assets/get-dressed.png');
@@ -93,9 +101,11 @@ export default class Demo extends Phaser.Scene {
 
   create() {
 
-    this.objectLayer = this.add.layer();
-    this.textLayer = this.add.layer();
+    // レイヤー設定
+    this.objectLayer = this.add.layer(); // 矩形やテキストのためのレイヤー
+    this.textLayer = this.add.layer();  // 更新をうながすテキストのためのレイヤー
 
+    // 時間表示のためのテキストオブジェクト
     this.timeText = this.add.text(30, 50, "");
     this.timeText.setFontSize(37);
 
@@ -106,6 +116,7 @@ export default class Demo extends Phaser.Scene {
     const { width, height } = this.game.canvas;
     const barWidth = width - (3 * margin);
 
+    // テキストの表示
     let textStart = this.add.text(60, 140, 'Start');
     textStart.setFontSize(30);
     this.objectLayer.add(textStart);
@@ -114,6 +125,8 @@ export default class Demo extends Phaser.Scene {
     textEnd.setFontSize(30);
     this.objectLayer.add(textEnd);
 
+    // 矩形オブジェクトを生成
+    // 朝食
     const eatBreakfastStart = this._date.set('hour', 6).set('minute', 40).set('second', 0);
     const eatBreakfastEnd = eatBreakfastStart.add(40, 'minute');
     this.eatBreakfast = new ProgressRect(this,
@@ -123,6 +136,7 @@ export default class Demo extends Phaser.Scene {
     this.add.existing(this.eatBreakfast);
     this.objectLayer.add(this.eatBreakfast);
 
+    // 着替え
     const getDressedStart = eatBreakfastEnd;
     const getDressedEnd = getDressedStart.add(5, 'minute');
     this.getDressed = new ProgressRect(this,
@@ -132,6 +146,7 @@ export default class Demo extends Phaser.Scene {
     this.add.existing(this.getDressed);
     this.objectLayer.add(this.getDressed);
 
+    // 歯磨き
     const brushingTeethStart = getDressedEnd;
     const brushingTeethEnd = brushingTeethStart.add(5, 'minute');
     this.brushingTeeth = new ProgressRect(this,
@@ -142,7 +157,6 @@ export default class Demo extends Phaser.Scene {
     this.objectLayer.add(this.brushingTeeth);
 
     // 日付が変わったため更新を促すテキスト
-
     const rectForText = this.add.rectangle(120, 150, width - 240, 400, 0x362466);
     rectForText.setOrigin(0, 0);
     this.textLayer.add(rectForText);
@@ -156,12 +170,14 @@ export default class Demo extends Phaser.Scene {
     let now = dayjs();
     this.counter++;
 
+    // オブジェクトの日付と当日が異なる場合は更新をうながすテキストを表示する
     if (now.day() === this.eatBreakfast.startDate.day()) {
       this.textLayer.setVisible(false);
     } else {
       this.textLayer.setVisible(true);
     }
 
+    // 一定フレーム経過後のみ画面を更新する
     if (this.counter > this.limit) {
       this.eatBreakfast.updateSize(now);
       this.getDressed.updateSize(now);
